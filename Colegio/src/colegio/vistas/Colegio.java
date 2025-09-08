@@ -3,12 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package colegio.vistas;
-
+import colegio.Alumno;
+import colegio.Materia;
+import java.util.HashSet;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Admin
  */
 public class Colegio extends javax.swing.JFrame {
+    public static HashSet<Alumno> alumnos = new HashSet<>();
+    public static HashSet<Materia> materias = new HashSet<>();
 
     /**
      * Creates new form Colegio
@@ -17,9 +22,9 @@ public class Colegio extends javax.swing.JFrame {
         initComponents();
         escritorio.setLayout(null);  
         // Configurar tamaños y posiciones de los JInternalFrames
-        jInternalFrameAlumno.setBounds(50, 50, 400, 250);
-        jInternalFrameMateria.setBounds(50, 50, 450, 250);
-        jInternalFrameInscripcion.setBounds(50, 50, 400, 200);
+        jInternalFrameAlumno.setBounds(50, 50, 450, 300);
+        jInternalFrameMateria.setBounds(50, 50, 450, 300);
+        jInternalFrameInscripcion.setBounds(50, 50, 400, 300);
         
         jInternalFrameAlumno.setDefaultCloseOperation(javax.swing.JInternalFrame.HIDE_ON_CLOSE);
         jInternalFrameMateria.setDefaultCloseOperation(javax.swing.JInternalFrame.HIDE_ON_CLOSE);
@@ -65,15 +70,15 @@ public class Colegio extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jInternalFrameAlumno = new javax.swing.JInternalFrame();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        legajoLabel = new javax.swing.JLabel();
+        apellidoLabel = new javax.swing.JLabel();
+        nombreLabel = new javax.swing.JLabel();
+        guardarAlumo = new javax.swing.JButton();
+        nuevoAlumno = new javax.swing.JButton();
+        salirAlumno = new javax.swing.JButton();
+        legajoInput = new javax.swing.JTextField();
+        apellidoInput = new javax.swing.JTextField();
+        nombreInput = new javax.swing.JTextField();
         jInternalFrameInscripcion = new javax.swing.JInternalFrame();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -116,6 +121,7 @@ public class Colegio extends javax.swing.JFrame {
         jTextField6.setText("jTextField6");
 
         jButton4.setText("Guardar");
+        jButton4.setEnabled(false);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -186,50 +192,75 @@ public class Colegio extends javax.swing.JFrame {
         jInternalFrameAlumno.setIconifiable(true);
         jInternalFrameAlumno.setMaximizable(true);
         jInternalFrameAlumno.setResizable(true);
-        jInternalFrameAlumno.setNormalBounds(new java.awt.Rectangle(50, 50, 400, 250));
+        jInternalFrameAlumno.setEnabled(false);
+        jInternalFrameAlumno.setNormalBounds(new java.awt.Rectangle(50, 50, 400, 350));
         jInternalFrameAlumno.setVisible(false);
 
         jLabel1.setBackground(new java.awt.Color(0, 153, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Formulario de alumnos");
 
-        jLabel2.setText("LEGAJO");
+        legajoLabel.setText("LEGAJO");
 
-        jLabel3.setText("APELLIDO");
+        apellidoLabel.setText("APELLIDO");
 
-        jLabel4.setText("NOMBRE");
+        nombreLabel.setText("NOMBRE");
 
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        guardarAlumo.setText("Guardar");
+        guardarAlumo.setEnabled(false);
+        guardarAlumo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                guardarAlumoActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Nuevo");
-
-        jButton3.setText("Salir");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        nuevoAlumno.setText("Nuevo");
+        nuevoAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                nuevoAlumnoActionPerformed(evt);
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        salirAlumno.setText("Salir");
+        salirAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                salirAlumnoActionPerformed(evt);
             }
         });
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        legajoInput.setEnabled(false);
+        legajoInput.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                legajoInputFocusLost(evt);
+            }
+        });
+        legajoInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                legajoInputActionPerformed(evt);
             }
         });
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        apellidoInput.setEnabled(false);
+        apellidoInput.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                apellidoInputFocusLost(evt);
+            }
+        });
+        apellidoInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                apellidoInputActionPerformed(evt);
+            }
+        });
+
+        nombreInput.setEnabled(false);
+        nombreInput.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nombreInputFocusLost(evt);
+            }
+        });
+        nombreInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreInputActionPerformed(evt);
             }
         });
 
@@ -238,32 +269,31 @@ public class Colegio extends javax.swing.JFrame {
         jInternalFrameAlumnoLayout.setHorizontalGroup(
             jInternalFrameAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrameAlumnoLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jInternalFrameAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(legajoLabel)
+                    .addComponent(apellidoLabel)
+                    .addComponent(nombreLabel))
+                .addGap(43, 43, 43)
+                .addGroup(jInternalFrameAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nombreInput)
+                    .addComponent(apellidoInput)
                     .addGroup(jInternalFrameAlumnoLayout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addComponent(jLabel1))
-                    .addGroup(jInternalFrameAlumnoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jInternalFrameAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(43, 43, 43)
-                        .addGroup(jInternalFrameAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3)
-                            .addComponent(jTextField2)
-                            .addGroup(jInternalFrameAlumnoLayout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addComponent(legajoInput, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(119, 119, 119))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameAlumnoLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(guardarAlumo)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(nuevoAlumno)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(salirAlumno)
                 .addGap(16, 16, 16))
+            .addGroup(jInternalFrameAlumnoLayout.createSequentialGroup()
+                .addGap(147, 147, 147)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jInternalFrameAlumnoLayout.setVerticalGroup(
             jInternalFrameAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,21 +301,21 @@ public class Colegio extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(38, 38, 38)
                 .addGroup(jInternalFrameAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(legajoLabel)
+                    .addComponent(legajoInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jInternalFrameAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(apellidoLabel)
+                    .addComponent(apellidoInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jInternalFrameAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nombreLabel)
+                    .addComponent(nombreInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addGroup(jInternalFrameAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(guardarAlumo)
+                    .addComponent(nuevoAlumno)
+                    .addComponent(salirAlumno))
                 .addContainerGap())
         );
 
@@ -303,6 +333,7 @@ public class Colegio extends javax.swing.JFrame {
         jLabel11.setText("ELIJA UN ALUMNO:");
 
         jButton7.setText("Inscribir");
+        jButton7.setEnabled(false);
 
         jButton8.setText("Salir");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -379,6 +410,7 @@ public class Colegio extends javax.swing.JFrame {
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
+<<<<<<< HEAD
                 .addGap(83, 83, 83)
                 .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -390,11 +422,16 @@ public class Colegio extends javax.swing.JFrame {
                     .addGroup(escritorioLayout.createSequentialGroup()
                         .addComponent(jInternalFrameInscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+=======
+                .addGap(316, 316, 316)
+                .addComponent(jInternalFrameInscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(298, Short.MAX_VALUE))
+>>>>>>> 9c373c9d40a77bac20f7d8e5af5952b0593ea815
             .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(escritorioLayout.createSequentialGroup()
-                    .addGap(255, 255, 255)
+                    .addGap(400, 400, 400)
                     .addComponent(jInternalFrameAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(696, Short.MAX_VALUE)))
+                    .addContainerGap(551, Short.MAX_VALUE)))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -410,9 +447,9 @@ public class Colegio extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(escritorioLayout.createSequentialGroup()
-                    .addGap(236, 236, 236)
+                    .addGap(400, 400, 400)
                     .addComponent(jInternalFrameAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(532, Short.MAX_VALUE)))
+                    .addContainerGap(368, Short.MAX_VALUE)))
         );
 
         alumnoMenu.setText("Alumno");
@@ -495,30 +532,116 @@ public class Colegio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void guardarAlumoActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            // Validar que los campos no estén vacíos
+            if (legajoInput.getText().isEmpty() || 
+                apellidoInput.getText().isEmpty() || 
+                nombreInput.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Complete todos los campos", 
+                    "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+            int legajo = Integer.parseInt(legajoInput.getText());
+            String apellido = apellidoInput.getText().trim();
+            String nombre = nombreInput.getText().trim();
+            
+            Alumno nuevoAlumno = new Alumno(legajo, apellido, nombre);
+            
+            
+            if (alumnos.add(nuevoAlumno)) {
+                JOptionPane.showMessageDialog(this, "Alumno guardado correctamente", 
+                    "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+                limpiarInputsAlumno();
+                desactivarCamposAlumno();
+                guardarAlumo.setEnabled(false);
+            } else {
+                JOptionPane.showMessageDialog(this, "Ya existe un alumno con ese legajo", 
+                    "Error", JOptionPane.ERROR_MESSAGE);
+                legajoInput.requestFocus();
+            }
+            
+            System.out.println(alumnos);
+            
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El legajo debe ser un número válido", 
+                "Error", JOptionPane.ERROR_MESSAGE);
+            legajoInput.requestFocus();
+        }
+    }                                            
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    private void salirAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirAlumnoActionPerformed
+        limpiarInputsAlumno();
+        desactivarCamposAlumno();
+        guardarAlumo.setEnabled(false);
+        jInternalFrameAlumno.setVisible(false);
+       
+    }//GEN-LAST:event_salirAlumnoActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void legajoInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_legajoInputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_legajoInputActionPerformed
+
+    private void apellidoInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidoInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_apellidoInputActionPerformed
+
+    private void nombreInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreInputActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
 
     }//GEN-LAST:event_jButton8ActionPerformed
 
+    private void nuevoAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoAlumnoActionPerformed
+        activarCamposAlumno();
+        guardarAlumo.setEnabled(true);
+    }//GEN-LAST:event_nuevoAlumnoActionPerformed
+
+    private void legajoInputFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_legajoInputFocusLost
+        String val= "[0-9]*";
+        if(!legajoInput.getText().matches(val) || legajoInput.getText().length() == 0 ){
+            JOptionPane.showMessageDialog(this, "Debe ingresar solo números y no puede estar vacío!");
+            legajoInput.requestFocus();
+        }
+    }//GEN-LAST:event_legajoInputFocusLost
+
+    private void apellidoInputFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_apellidoInputFocusLost
+        if(apellidoInput.getText().length() == 0){
+            JOptionPane.showMessageDialog(this, "El apellido no puede estar vacio!");
+            apellidoInput.requestFocus();
+        }
+    }//GEN-LAST:event_apellidoInputFocusLost
+
+    private void nombreInputFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nombreInputFocusLost
+        if(nombreInput.getText().length() == 0){
+            JOptionPane.showMessageDialog(this, "El nombre no puede estar vacio!");
+            nombreInput.requestFocus();
+        }
+    }//GEN-LAST:event_nombreInputFocusLost
+    
+
+    
+    private void activarCamposAlumno(){
+        legajoInput.setEnabled(true);
+        apellidoInput.setEnabled(true);
+        nombreInput.setEnabled(true);
+    }
+    
+    private void desactivarCamposAlumno(){
+        legajoInput.setEnabled(false);
+        apellidoInput.setEnabled(false);
+        nombreInput.setEnabled(false);
+    }
+    private void limpiarInputsAlumno(){
+        legajoInput.setText("");
+        apellidoInput.setText("");
+        nombreInput.setText("");
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -556,10 +679,10 @@ public class Colegio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu alumnoMenu;
+    private javax.swing.JTextField apellidoInput;
+    private javax.swing.JLabel apellidoLabel;
     private javax.swing.JDesktopPane escritorio;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton guardarAlumo;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -574,9 +697,6 @@ public class Colegio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -584,16 +704,19 @@ public class Colegio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemRegistro;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField legajoInput;
+    private javax.swing.JLabel legajoLabel;
     private javax.swing.JMenu materiaMenu;
     private javax.swing.JMenuItem menuItemAlumno;
     private javax.swing.JMenuItem menuItemMateria;
+    private javax.swing.JTextField nombreInput;
+    private javax.swing.JLabel nombreLabel;
+    private javax.swing.JButton nuevoAlumno;
     private javax.swing.JMenu registroMenu;
+    private javax.swing.JButton salirAlumno;
     private javax.swing.JMenu salirMenu;
     // End of variables declaration//GEN-END:variables
 }
